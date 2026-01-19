@@ -8,6 +8,6 @@ class LoginModel extends Model
 {
     protected $table            = 'user';
     protected $primaryKey       = 'id';
-    protected $allowedFields = ['id_karyawan', 'username', 'password', 'level'];
+    protected $allowedFields = ['id_karyawan', 'username', 'password', 'level','foto'];
 
 }

@@ -12,6 +12,7 @@
 
     <link href="<?php echo base_url() ?>/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="<?php echo base_url() ?>/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="<?php echo base_url() ?>/assets/vendor/login.css" rel="stylesheet" type="text/css">
 
     <style>
@@ -21,7 +22,7 @@
 
 <body>
     <div class="login-container">
-        <img src="https://via.placeholder.com/120x40/00FFFF/0F2027?text=LOGO+ANDA" alt="Company Logo" class="logo">
+        <img src="https://via.placeholder.com/120x40/00FFFF/0F2027?text=LOGO+ANDA" alt="" class="logo">
         <h1>APLIKASI PENGGAJIAN <br>CV.GEMILANG SUKSES MANDIRI</h1>
         
         <?php if(!empty(session()->getFlashdata('pesan'))) : ?>
@@ -53,7 +54,14 @@
             <button type="submit" class="btn btn-block btn-login">
                 Login
             </button>
+            <div>
+            </div>
+            <button type="button" id="themeToggle" class="toggle-theme">
+            🌙 Dark Mode
+            </button>
+
         </form>
+
     </div>
 
     <script src="<?php echo base_url() ?>/assets/vendor/jquery/jquery.min.js"></script>
@@ -62,6 +70,34 @@
     <script src="<?php echo base_url() ?>/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <script src="<?php echo base_url() ?>/assets/js/sb-admin-2.min.js"></script>
+    <script>
+        const toggle = document.getElementById('themeToggle');
+
+        // Cek jika user pernah aktifkan dark mode
+        if(localStorage.getItem("theme") === "dark") {
+            document.body.classList.add("dark-mode");
+            toggle.innerHTML = "☀ Light Mode";
+        }
+        toggle.innerHTML = document.body.classList.contains("dark-mode") 
+        ? "☀ Light Mode" : "🌙 Dark Mode";
+
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.body.classList.add("dark-mode");
+        }
+
+        toggle.addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
+
+            // Simpan preferensi user
+            if(document.body.classList.contains("dark-mode")) {
+                localStorage.setItem("theme", "dark");
+                toggle.innerHTML = "☀ Light Mode";
+            } else {
+                localStorage.setItem("theme", "light");
+                toggle.innerHTML = "🌙 Dark Mode";
+            }
+        });
+    </script>
 
 </body>
 
